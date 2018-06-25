@@ -227,7 +227,7 @@ class TextInput extends React.Component<Props, State> {
   _handleFocus = (...args) => {
     this.setState({ focused: true });
 
-    if (this.props.onFocus) {
+    if (!this.props.disabled && this.props.onFocus) {
       this.props.onFocus(...args);
     }
   };
@@ -235,7 +235,7 @@ class TextInput extends React.Component<Props, State> {
   _handleBlur = (...args) => {
     this.setState({ focused: false });
 
-    if (this.props.onBlur) {
+    if (!this.props.disabled && this.props.onBlur) {
       this.props.onBlur(...args);
     }
   };
