@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import { grey200 } from '../../styles/colors';
 import type { Theme } from '../../types';
 
@@ -28,18 +28,22 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Card, CardCover } from 'react-native-paper';
+ * import { Card } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
- *     <CardCover source={{ uri: 'https://picsum.photos/700' }} />
+ *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
  *   </Card>
  * );
+ *
+ * export default MyComponent;
  * ```
  *
  * @extends Image props https://facebook.github.io/react-native/docs/image.html#props
  */
 class CardCover extends React.Component<Props> {
+  static displayName = 'Card.Cover';
+
   render() {
     const { index, total, style, theme, ...rest } = this.props;
     const { roundness } = theme;

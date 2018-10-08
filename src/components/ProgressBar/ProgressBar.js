@@ -4,7 +4,7 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import setColor from 'color';
 import ProgressBarComponent from './ProgressBarComponent';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {
@@ -33,11 +33,13 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ProgressBar } from 'react-native-paper';
+ * import { ProgressBar, Colors } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <ProgressBar progress={0.5} color={Colors.red800} />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class ProgressBar extends React.Component<Props> {

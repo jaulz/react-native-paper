@@ -1,8 +1,8 @@
 /* @flow */
 
 import * as React from 'react';
-import ThemeProvider from './ThemeProvider';
-import PortalHost from '../components/Portal/PortalHost';
+import { ThemeProvider } from './theming';
+import Portal from '../components/Portal/Portal';
 import type { Theme } from '../types';
 
 type Props = {
@@ -13,11 +13,11 @@ type Props = {
 export default class Provider extends React.Component<Props> {
   render() {
     return (
-      <PortalHost>
+      <Portal.Host>
         <ThemeProvider theme={this.props.theme}>
           {this.props.children}
         </ThemeProvider>
-      </PortalHost>
+      </Portal.Host>
     );
   }
 }

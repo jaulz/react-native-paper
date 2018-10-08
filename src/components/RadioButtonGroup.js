@@ -34,16 +34,16 @@ export const RadioButtonContext: Context<?RadioButtonContextType> = createReactC
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { RadioButtonGroup, RadioButton, Text } from 'react-native-paper';
+ * import { RadioButton, Text } from 'react-native-paper';
  *
- * export default class MyComponent extends Component {
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     value: 'first',
  *   };
  *
  *   render() {
  *     return(
- *       <RadioButtonGroup
+ *       <RadioButton.Group
  *         onValueChange={value => this.setState({ value })}
  *         value={this.state.value}
  *       >
@@ -55,13 +55,15 @@ export const RadioButtonContext: Context<?RadioButtonContextType> = createReactC
  *           <Text>Second</Text>
  *           <RadioButton value="second" />
  *         </View>
- *       </RadioButtonGroup>
+ *       </RadioButton.Group>
  *     )
  *   }
  * }
  *```
  */
 class RadioButtonGroup extends React.Component<Props> {
+  static displayName = 'RadioButton.Group';
+
   render() {
     const { value, onValueChange, children } = this.props;
 

@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import color from 'color';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 const ANDROID_VERSION_LOLLIPOP = 21;
@@ -69,6 +69,8 @@ type Props = {
  *     <Text>Press me</Text>
  *   </TouchableRipple>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class TouchableRipple extends React.Component<Props, void> {
@@ -79,8 +81,8 @@ class TouchableRipple extends React.Component<Props, void> {
   /**
    * Whether ripple effect is supported.
    */
-  static supported = Platform.OS === 'android' &&
-  Platform.Version >= ANDROID_VERSION_LOLLIPOP;
+  static supported =
+    Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
 
   render() {
     const {

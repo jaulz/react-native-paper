@@ -21,6 +21,8 @@ exports[`renders list section with title 1`] = `
         Object {
           "color": "#000000",
           "fontFamily": "Helvetica Neue",
+          "textAlign": "left",
+          "writingDirection": "ltr",
         },
         Array [
           Object {
@@ -37,13 +39,14 @@ exports[`renders list section with title 1`] = `
     theme={
       Object {
         "colors": Object {
-          "accent": "#ff4081",
-          "background": "#fafafa",
+          "accent": "#03dac4",
+          "backdrop": "rgba(0, 0, 0, 0.5)",
+          "background": "#f6f6f6",
           "disabled": "rgba(0, 0, 0, 0.26)",
-          "error": "#ff1744",
-          "paper": "#ffffff",
-          "placeholder": "rgba(0, 0, 0, 0.38)",
-          "primary": "#3f51b5",
+          "error": "#B00020",
+          "placeholder": "rgba(0, 0, 0, 0.54)",
+          "primary": "#6200ee",
+          "surface": "#ffffff",
           "text": "#000000",
         },
         "dark": false,
@@ -53,7 +56,7 @@ exports[`renders list section with title 1`] = `
           "regular": "Helvetica Neue",
           "thin": "HelveticaNeue-Thin",
         },
-        "roundness": 2,
+        "roundness": 4,
       }
     }
   >
@@ -89,9 +92,10 @@ exports[`renders list section with title 1`] = `
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,
@@ -99,9 +103,11 @@ exports[`renders list section with title 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -109,9 +115,18 @@ exports[`renders list section with title 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -147,6 +162,8 @@ exports[`renders list section with title 1`] = `
               Object {
                 "color": "#000000",
                 "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -161,13 +178,14 @@ exports[`renders list section with title 1`] = `
           theme={
             Object {
               "colors": Object {
-                "accent": "#ff4081",
-                "background": "#fafafa",
+                "accent": "#03dac4",
+                "backdrop": "rgba(0, 0, 0, 0.5)",
+                "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#ff1744",
-                "paper": "#ffffff",
-                "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#3f51b5",
+                "error": "#B00020",
+                "placeholder": "rgba(0, 0, 0, 0.54)",
+                "primary": "#6200ee",
+                "surface": "#ffffff",
                 "text": "#000000",
               },
               "dark": false,
@@ -177,7 +195,7 @@ exports[`renders list section with title 1`] = `
                 "regular": "Helvetica Neue",
                 "thin": "HelveticaNeue-Thin",
               },
-              "roundness": 2,
+              "roundness": 4,
             }
           }
         >
@@ -216,9 +234,10 @@ exports[`renders list section with title 1`] = `
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,
@@ -226,9 +245,11 @@ exports[`renders list section with title 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -236,9 +257,18 @@ exports[`renders list section with title 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -274,6 +304,8 @@ exports[`renders list section with title 1`] = `
               Object {
                 "color": "#000000",
                 "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -288,13 +320,14 @@ exports[`renders list section with title 1`] = `
           theme={
             Object {
               "colors": Object {
-                "accent": "#ff4081",
-                "background": "#fafafa",
+                "accent": "#03dac4",
+                "backdrop": "rgba(0, 0, 0, 0.5)",
+                "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#ff1744",
-                "paper": "#ffffff",
-                "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#3f51b5",
+                "error": "#B00020",
+                "placeholder": "rgba(0, 0, 0, 0.54)",
+                "primary": "#6200ee",
+                "surface": "#ffffff",
                 "text": "#000000",
               },
               "dark": false,
@@ -304,7 +337,7 @@ exports[`renders list section with title 1`] = `
                 "regular": "Helvetica Neue",
                 "thin": "HelveticaNeue-Thin",
               },
-              "roundness": 2,
+              "roundness": 4,
             }
           }
         >
@@ -357,9 +390,10 @@ exports[`renders list section without title 1`] = `
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,
@@ -367,9 +401,11 @@ exports[`renders list section without title 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -377,9 +413,18 @@ exports[`renders list section without title 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -415,6 +460,8 @@ exports[`renders list section without title 1`] = `
               Object {
                 "color": "#000000",
                 "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -429,13 +476,14 @@ exports[`renders list section without title 1`] = `
           theme={
             Object {
               "colors": Object {
-                "accent": "#ff4081",
-                "background": "#fafafa",
+                "accent": "#03dac4",
+                "backdrop": "rgba(0, 0, 0, 0.5)",
+                "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#ff1744",
-                "paper": "#ffffff",
-                "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#3f51b5",
+                "error": "#B00020",
+                "placeholder": "rgba(0, 0, 0, 0.54)",
+                "primary": "#6200ee",
+                "surface": "#ffffff",
                 "text": "#000000",
               },
               "dark": false,
@@ -445,7 +493,7 @@ exports[`renders list section without title 1`] = `
                 "regular": "Helvetica Neue",
                 "thin": "HelveticaNeue-Thin",
               },
-              "roundness": 2,
+              "roundness": 4,
             }
           }
         >
@@ -484,9 +532,10 @@ exports[`renders list section without title 1`] = `
         style={
           Array [
             Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
               "margin": 8,
-            },
-            Object {
               "width": 40,
             },
             undefined,
@@ -494,9 +543,11 @@ exports[`renders list section without title 1`] = `
         }
       >
         <Text
+          accessibilityElementsHidden={true}
           accessible={true}
           allowFontScaling={false}
           ellipsizeMode="tail"
+          importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
             Array [
@@ -504,9 +555,18 @@ exports[`renders list section without title 1`] = `
                 "color": "rgba(0, 0, 0, 0.54)",
                 "fontSize": 24,
               },
-              Object {
-                "backgroundColor": "transparent",
-              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
               Object {
                 "fontFamily": "Material Icons",
                 "fontStyle": "normal",
@@ -542,6 +602,8 @@ exports[`renders list section without title 1`] = `
               Object {
                 "color": "#000000",
                 "fontFamily": "Helvetica Neue",
+                "textAlign": "left",
+                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -556,13 +618,14 @@ exports[`renders list section without title 1`] = `
           theme={
             Object {
               "colors": Object {
-                "accent": "#ff4081",
-                "background": "#fafafa",
+                "accent": "#03dac4",
+                "backdrop": "rgba(0, 0, 0, 0.5)",
+                "background": "#f6f6f6",
                 "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#ff1744",
-                "paper": "#ffffff",
-                "placeholder": "rgba(0, 0, 0, 0.38)",
-                "primary": "#3f51b5",
+                "error": "#B00020",
+                "placeholder": "rgba(0, 0, 0, 0.54)",
+                "primary": "#6200ee",
+                "surface": "#ffffff",
                 "text": "#000000",
               },
               "dark": false,
@@ -572,7 +635,7 @@ exports[`renders list section without title 1`] = `
                 "regular": "Helvetica Neue",
                 "thin": "HelveticaNeue-Thin",
               },
-              "roundness": 2,
+              "roundness": 4,
             }
           }
         >

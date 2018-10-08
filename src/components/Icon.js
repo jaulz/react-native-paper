@@ -1,7 +1,8 @@
 /* @flow */
 
 import * as React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, StyleSheet, I18nManager } from 'react-native';
+import type { ImageSource } from 'react-native/Libraries/Image/ImageSource';
 
 let MaterialIcons;
 
@@ -27,13 +28,12 @@ try {
   };
 }
 
+type IconSourceBase = string | ImageSource;
+
 export type IconSource =
-  | string
-  | number
-  | { uri: string }
-  | ((props: IconProps) => React.Node)
-  // This will be removed in next major version
-  | React.Node;
+  | IconSourceBase
+  | $ReadOnly<{ source: IconSourceBase, direction: 'rtl' | 'ltr' | 'auto' }>
+  | ((props: IconProps) => React.Node);
 
 type IconProps = {
   color: string,
@@ -41,7 +41,7 @@ type IconProps = {
 };
 
 type Props = IconProps & {
-  name: IconSource,
+  source: IconSource,
 };
 
 const isImageSource = (source: any) =>
@@ -72,61 +72,68 @@ export const isValidIcon = (source: any) =>
 export const isEqualIcon = (a: any, b: any) =>
   a === b || getIconId(a) === getIconId(b);
 
-const Icon = ({ name, color, size, ...rest }: Props) => {
-  if (typeof name === 'string') {
+const Icon = ({ source, color, size, ...rest }: Props) => {
+  const direction =
+    typeof source === 'object' && source.direction && source.source
+      ? source.direction === 'auto'
+        ? I18nManager.isRTL
+          ? 'rtl'
+          : 'ltr'
+        : source.direction
+      : null;
+  const s =
+    typeof source === 'object' && source.direction && source.source
+      ? source.source
+      : source;
+
+  if (typeof s === 'string') {
     return (
       <MaterialIcons
         {...rest}
-        name={name}
+        name={s}
         color={color}
         size={size}
-        style={styles.icon}
+        style={[
+          {
+            transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+          },
+          styles.icon,
+        ]}
         pointerEvents="none"
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
       />
     );
-  } else if (isImageSource(name)) {
+  } else if (isImageSource(s)) {
     return (
       <Image
         {...rest}
-        source={name}
+        source={s}
         style={[
+          {
+            transform: [{ scaleX: direction === 'rtl' ? -1 : 1 }],
+          },
           {
             width: size,
             height: size,
             tintColor: color,
+            resizeMode: 'contain',
           },
         ]}
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
       />
     );
-  } else if (typeof name === 'function') {
-    return name({ color, size });
+  } else if (typeof s === 'function') {
+    return s({ color, size, direction });
   }
 
-  return (
-    <View
-      {...rest}
-      style={[
-        {
-          width: size,
-          height: size,
-        },
-        styles.container,
-      ]}
-      pointerEvents="box-none"
-    >
-      {(name: any)}
-    </View>
-  );
+  return null;
 };
 
 export default Icon;
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-  },
   icon: {
     backgroundColor: 'transparent',
   },

@@ -59,11 +59,11 @@ it('renders custom icon and label in shifting bottom navigation', () => {
         navigationState={createState(0, 5)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
-        renderIcon={({ route, focused }) => (
-          <icon color={focused ? 'blue' : 'white'}>{route.icon}</icon>
+        renderIcon={({ route, color }) => (
+          <icon color={color}>{route.icon}</icon>
         )}
-        renderLabel={({ route, focused }) => (
-          <text color={focused ? 'blue' : 'white'}>{route.label}</text>
+        renderLabel={({ route, color }) => (
+          <text color={color}>{route.label}</text>
         )}
       />
     )
@@ -80,12 +80,80 @@ it('renders custom icon and label in non-shifting bottom navigation', () => {
         navigationState={createState(0, 3)}
         onIndexChange={jest.fn()}
         renderScene={({ route }) => route.title}
-        renderIcon={({ route, focused }) => (
-          <icon color={focused ? 'blue' : 'white'}>{route.icon}</icon>
+        renderIcon={({ route, color }) => (
+          <icon color={color}>{route.icon}</icon>
         )}
-        renderLabel={({ route, focused }) => (
-          <text color={focused ? 'blue' : 'white'}>{route.label}</text>
+        renderLabel={({ route, color }) => (
+          <text color={color}>{route.label}</text>
         )}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders custom icon and label with custom colors in shifting bottom navigation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+        activeColor="#FBF7DB"
+        inactiveColor="#853D4B"
+        barStyle={{ backgroundColor: '#E96A82' }}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders custom icon and label with custom colors in non-shifting bottom navigation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting={false}
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+        activeColor="#FBF7DB"
+        inactiveColor="#853D4B"
+        barStyle={{ backgroundColor: '#E96A82' }}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('hides labels in shifting bottom navigation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting
+        labeled={false}
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
+      />
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('hides labels in non-shifting bottom navigation', () => {
+  const tree = renderer
+    .create(
+      <BottomNavigation
+        shifting={false}
+        labeled={false}
+        navigationState={createState(0, 3)}
+        onIndexChange={jest.fn()}
+        renderScene={({ route }) => route.title}
       />
     )
     .toJSON();

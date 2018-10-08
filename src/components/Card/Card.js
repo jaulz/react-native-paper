@@ -7,17 +7,22 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
 } from 'react-native';
-import Paper from '../Paper';
-import withTheme from '../../core/withTheme';
+import CardContent from './CardContent';
+import CardActions from './CardActions';
+import CardCover from './CardCover';
+import Surface from '../Surface';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   /**
    * Resting elevation of the card which controls the drop shadow.
    */
   elevation?: number,
+  /**
+   * Function to execute on long press.
+   */
+  onLongPress?: () => mixed,
   /**
    * Function to execute on press.
    */
@@ -48,34 +53,35 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import {
- *   Button,
- *   Card,
- *   CardActions,
- *   CardContent,
- *   CardCover,
- *   Title,
- *   Paragraph
- * } from 'react-native-paper';
+ * import { Button, Card, Title, Paragraph } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
- *     <CardContent>
+ *     <Card.Content>
  *       <Title>Card title</Title>
  *       <Paragraph>Card content</Paragraph>
- *     </CardContent>
- *     <CardCover source={{ uri: 'https://picsum.photos/700' }} />
- *     <CardActions>
+ *     </Card.Content>
+ *     <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+ *     <Card.Actions>
  *       <Button>Cancel</Button>
  *       <Button>Ok</Button>
- *     </CardActions>
+ *     </Card.Actions>
  *   </Card>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class Card extends React.Component<Props, State> {
+  // @component ./CardContent.js
+  static Content = CardContent;
+  // @component ./CardActions.js
+  static Actions = CardActions;
+  // @component ./CardCover.js
+  static Cover = CardCover;
+
   static defaultProps = {
-    elevation: 2,
+    elevation: 1,
   };
 
   state = {
@@ -86,7 +92,7 @@ class Card extends React.Component<Props, State> {
   _handlePressIn = () => {
     Animated.timing(this.state.elevation, {
       toValue: 8,
-      duration: 200,
+      duration: 150,
     }).start();
   };
 
@@ -99,7 +105,7 @@ class Card extends React.Component<Props, State> {
   };
 
   render() {
-    const { children, onPress, style, theme } = this.props;
+    const { children, onLongPress, onPress, style, theme } = this.props;
     const { elevation } = this.state;
     const { roundness } = theme;
     const total = React.Children.count(children);
@@ -111,15 +117,14 @@ class Card extends React.Component<Props, State> {
           : null
     );
     return (
-      <AnimatedPaper
-        style={[styles.card, { borderRadius: roundness, elevation }, style]}
-      >
+      <Surface style={[{ borderRadius: roundness, elevation }, style]}>
         <TouchableWithoutFeedback
           delayPressIn={0}
+          disabled={!(onPress || onLongPress)}
+          onLongPress={onLongPress}
           onPress={onPress}
           onPressIn={onPress ? this._handlePressIn : undefined}
           onPressOut={onPress ? this._handlePressOut : undefined}
-          style={styles.container}
         >
           <View style={styles.innerContainer}>
             {React.Children.map(
@@ -135,18 +140,12 @@ class Card extends React.Component<Props, State> {
             )}
           </View>
         </TouchableWithoutFeedback>
-      </AnimatedPaper>
+      </Surface>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  card: {
-    margin: 4,
-  },
-  container: {
-    flex: 1,
-  },
   innerContainer: {
     flexGrow: 1,
   },

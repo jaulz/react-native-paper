@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import Title from '../Typography/Title';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Dialog, DialogContent, DialogTitle, Paragraph } from 'react-native-paper';
+ * import { Paragraph, Dialog, Portal } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -35,27 +35,33 @@ type Props = {
  *
  *   render() {
  *     return (
- *       <Dialog
- *         visible={this.state.visible}
- *         onDismiss={this._hideDialog}>
- *         <DialogTitle>This is a title</DialogTitle>
- *         <DialogContent>
- *           <Paragraph>This is simple dialog</Paragraph>
- *         </DialogContent>
- *       </Dialog>
+ *       <Portal>
+ *         <Dialog
+ *           visible={this.state.visible}
+ *           onDismiss={this._hideDialog}>
+ *           <Dialog.Title>This is a title</Dialog.Title>
+ *           <Dialog.Content>
+ *             <Paragraph>This is simple dialog</Paragraph>
+ *           </Dialog.Content>
+ *         </Dialog>
+ *       </Portal>
  *     );
  *   }
  * }
  * ```
  */
 class DialogTitle extends React.Component<Props> {
+  static displayName = 'Dialog.Title';
+
   render() {
     const { children, theme, style, ...rest } = this.props;
 
     return (
       <Title
-        {...rest}
+        accessibilityTraits="header"
+        accessibilityRole="header"
         style={[styles.text, { color: theme.colors.text }, style]}
+        {...rest}
       >
         {children}
       </Title>

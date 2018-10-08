@@ -19,7 +19,7 @@ type Props = {
  * ```js
  * import * as React from 'react';
  * import { ScrollView } from 'react-native';
- * import { Dialog, DialogScrollArea } from 'react-native-paper';
+ * import { Dialog, Portal } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -30,23 +30,33 @@ type Props = {
  *
  *   render() {
  *     return (
- *       <Dialog
- *         visible={this.state.visible}
- *         onDismiss={this._hideDialog}>
- *         <DialogScrollArea>
- *           <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
- *             This is a scrollable area
- *           </ScrollView>
- *         </DialogScrollArea>
- *       </Dialog>
+ *       <Portal>
+ *         <Dialog
+ *           visible={this.state.visible}
+ *           onDismiss={this._hideDialog}>
+ *           <Dialog.ScrollArea>
+ *             <ScrollView contentContainerStyle={{ paddingHorizontal: 24 }}>
+ *               This is a scrollable area
+ *             </ScrollView>
+ *           </Dialog.ScrollArea>
+ *         </Dialog>
+ *       </Portal>
  *     );
  *   }
  * }
  * ```
  */
-const DialogScrollArea = ({ children, style }: Props) => (
-  <View style={[styles.container, style]}>{children}</View>
-);
+class DialogScrollArea extends React.Component<Props> {
+  static displayName = 'Dialog.ScrollArea';
+
+  render() {
+    return (
+      <View style={[styles.container, this.props.style]}>
+        {this.props.children}
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

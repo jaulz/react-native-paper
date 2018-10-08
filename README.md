@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="react-native-paper" src="docs/assets/images/paper-color.png" width="300">
+  <img alt="react-native-paper" src="docs/assets/images/paper-logo.svg" width="300">
 </p>
 <p align="center">
   Material design for React Native.
@@ -23,7 +23,7 @@ Currently supported React Native version: `>= 0.50.3`
 
 ## Try it out
 
-Run the [example app](https://exp.host/@satya164/react-native-paper-example) with [Expo](https://expo.io/) to see it in action.
+Run the [example app](https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example) with [Expo](https://expo.io/) to see it in action.
 
 The source code for the examples are under the [/example](/example) folder.
 

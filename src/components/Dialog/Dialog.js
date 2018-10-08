@@ -1,17 +1,15 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, Platform, Animated } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import Modal from '../Modal';
-import { white } from '../../styles/colors';
-import Paper from '../Paper';
+import Surface from '../Surface';
+import DialogContent from './DialogContent';
 import DialogActions from './DialogActions';
 import DialogTitle from './DialogTitle';
-import DialogContent from './DialogContent';
-import withTheme from '../../core/withTheme';
+import DialogScrollArea from './DialogScrollArea';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
 
 type Props = {
   /**
@@ -39,6 +37,7 @@ type Props = {
 
 /**
  * Dialogs inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks.
+ * To render the `Dialog` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
  *  <div class="screenshots">
  *   <img class="medium" src="screenshots/dialog-1.png" />
@@ -49,7 +48,7 @@ type Props = {
  * ```js
  * import * as React from 'react';
  * import { View } from 'react-native';
- * import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Paragraph } from 'react-native-paper';
+ * import { Button, Paragraph, Dialog, Portal } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -57,25 +56,26 @@ type Props = {
  *   };
  *
  *   _showDialog = () => this.setState({ visible: true });
+ *
  *   _hideDialog = () => this.setState({ visible: false });
  *
  *   render() {
- *     const { visible } = this.state;
  *     return (
  *       <View>
  *         <Button onPress={this._showDialog}>Show Dialog</Button>
- *         <Dialog
- *            visible={visible}
- *            onDismiss={this._hideDialog}
- *         >
- *           <DialogTitle>Alert</DialogTitle>
- *           <DialogContent>
- *             <Paragraph>This is simple dialog</Paragraph>
- *           </DialogContent>
- *           <DialogActions>
- *             <Button onPress={this._hideDialog}>Done</Button>
- *           </DialogActions>
- *         </Dialog>
+ *         <Portal>
+ *           <Dialog
+ *              visible={this.state.visible}
+ *              onDismiss={this._hideDialog}>
+ *             <Dialog.Title>Alert</Dialog.Title>
+ *             <Dialog.Content>
+ *               <Paragraph>This is simple dialog</Paragraph>
+ *             </Dialog.Content>
+ *             <Dialog.Actions>
+ *               <Button onPress={this._hideDialog}>Done</Button>
+ *             </Dialog.Actions>
+ *           </Dialog>
+ *         </Portal>
  *       </View>
  *     );
  *   }
@@ -83,6 +83,15 @@ type Props = {
  * ```
  */
 class Dialog extends React.Component<Props, void> {
+  // @component ./DialogContent.js
+  static Content = DialogContent;
+  // @component ./DialogActions.js
+  static Actions = DialogActions;
+  // @component ./DialogTitle.js
+  static Title = DialogTitle;
+  // @component ./DialogScrollArea.js
+  static ScrollArea = DialogScrollArea;
+
   static defaultProps = {
     dismissable: true,
     visible: false,
@@ -98,51 +107,32 @@ class Dialog extends React.Component<Props, void> {
       theme,
     } = this.props;
 
-    const backgroundColor = theme.colors.paper;
-
-    const childrenArray = React.Children.toArray(children);
-    const title = childrenArray.find(
-      child => React.isValidElement(child) && child.type === DialogTitle
-    );
-    const actionBtnsChildren = childrenArray.filter(
-      child => React.isValidElement(child) && child.type === DialogActions
-    );
-    const restOfChildren = childrenArray.filter(
-      child =>
-        React.isValidElement(child) &&
-        child.type !== DialogActions &&
-        child.type !== DialogTitle
-    );
-    let restOfChildrenWithoutTitle = restOfChildren;
-    if (!title) {
-      let found = false;
-      restOfChildrenWithoutTitle = restOfChildren.map(child => {
-        if (
-          React.isValidElement(child) &&
-          child.type === DialogContent &&
-          !found
-        ) {
-          found = true;
-          return React.cloneElement(child, {
-            style: { paddingTop: 24 },
-          });
-        }
-        return child;
-      });
-    }
     return (
       <Modal dismissable={dismissable} onDismiss={onDismiss} visible={visible}>
-        <AnimatedPaper style={[styles.container, { backgroundColor }, style]}>
-          {title}
-          {restOfChildrenWithoutTitle}
-          {actionBtnsChildren}
-        </AnimatedPaper>
+        <Surface
+          style={[styles.container, { borderRadius: theme.roundness }, style]}
+        >
+          {React.Children.toArray(children)
+            .filter(child => child != null && typeof child !== 'boolean')
+            .map((child, i) => {
+              if (
+                i === 0 &&
+                React.isValidElement(child) &&
+                child.type === DialogContent
+              ) {
+                // Dialog content is the first item, so we add a top padding
+                return React.cloneElement(child, {
+                  style: [{ paddingTop: 24 }, child.props.style],
+                });
+              }
+
+              return child;
+            })}
+        </Surface>
       </Modal>
     );
   }
 }
-
-export default withTheme(Dialog);
 
 const styles = StyleSheet.create({
   container: {
@@ -155,8 +145,8 @@ const styles = StyleSheet.create({
      */
     marginVertical: Platform.OS === 'android' ? 44 : 0,
     marginHorizontal: 26,
-    borderRadius: 2,
-    backgroundColor: white,
     elevation: 24,
   },
 });
+
+export default withTheme(Dialog);

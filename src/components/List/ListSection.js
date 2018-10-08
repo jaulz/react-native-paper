@@ -4,7 +4,7 @@ import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Text from '../Typography/Text';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
 };
 
 /**
- * `ListSection` groups items, usually `ListItem`.
+ * A component used to group list items.
  *
  * <div class="screenshots">
  *   <img src="screenshots/list-section.png" />
@@ -33,27 +33,31 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListSection, ListItem } from 'react-native-paper';
+ * import { List } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   render() {
  *     return (
- *       <ListSection title="Some title">
- *         <ListItem
+ *       <List.Section title="Some title">
+ *         <List.Item
  *           title="First Item"
- *           icon="folder"
+ *           left={() => <List.Icon icon="folder" />}
  *        />
- *         <ListItem
+ *         <List.Item
  *           title="Second Item"
- *           icon="folder"
+ *           left={() => <List.Icon icon="folder" />}
  *        />
- *      </ListSection>
+ *      </List.Section>
  *     );
  *   }
  * }
+ *
+ * export default MyComponent;
  * ```
  */
 class ListSection extends React.Component<Props> {
+  static displayName = 'List.Section';
+
   render() {
     const { children, title, theme, style, ...rest } = this.props;
     const { colors, fonts } = theme;

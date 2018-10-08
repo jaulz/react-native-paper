@@ -23,6 +23,8 @@ type Props = {
  * const MyComponent = () => (
  *   <Caption>Caption</Caption>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 const Caption = (props: Props) => (
@@ -38,7 +40,7 @@ export default Caption;
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 14,
+    fontSize: 12,
     lineHeight: 20,
     marginVertical: 2,
   },

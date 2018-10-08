@@ -17,19 +17,23 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Button, Card, CardActions } from 'react-native-paper';
+ * import { Button, Card } from 'react-native-paper';
  *
  * const MyComponent = () => (
  *   <Card>
- *     <CardActions>
+ *     <Card.Actions>
  *       <Button>Cancel</Button>
  *       <Button>Ok</Button>
- *     </CardActions>
+ *     </Card.Actions>
  *   </Card>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class CardActions extends React.Component<Props> {
+  static displayName = 'Card.Actions';
+
   render() {
     return (
       <View {...this.props} style={[styles.container, this.props.style]}>
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: 4,
+    padding: 8,
   },
 });
 

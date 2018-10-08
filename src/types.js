@@ -6,12 +6,13 @@ export type Theme = {
   colors: {
     primary: string,
     background: string,
-    paper: string,
+    surface: string,
     accent: string,
     error: string,
     text: string,
     disabled: string,
     placeholder: string,
+    backdrop: string,
   },
   fonts: {
     regular: string,

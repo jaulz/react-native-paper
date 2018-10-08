@@ -10,7 +10,8 @@ import {
   BackHandler,
 } from 'react-native';
 import { polyfill } from 'react-lifecycles-compat';
-import ThemedPortal from './Portal/ThemedPortal';
+import { withTheme } from '../core/theming';
+import type { Theme } from '../types';
 
 type Props = {
   /**
@@ -29,6 +30,10 @@ type Props = {
    * Content of the `Modal`.
    */
   children: React.Node,
+  /**
+   * @optional
+   */
+  theme: Theme,
 };
 
 type State = {
@@ -38,11 +43,12 @@ type State = {
 
 /**
  * The Modal component is a simple way to present content above an enclosing view.
+ * To render the `Modal` above other components, you'll need to wrap it with the [`Portal`](portal.html) component.
  *
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { Modal, Text } from 'react-native-paper';
+ * import { Modal, Portal, Text } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
  *   state = {
@@ -55,9 +61,11 @@ type State = {
  *   render() {
  *     const { visible } = this.state;
  *     return (
- *       <Modal visible={visible} onDismiss={this._hideModal}>
- *         <Text>Example Modal</Text>
- *       </Modal>
+ *       <Portal>
+ *         <Modal visible={visible} onDismiss={this._hideModal}>
+ *           <Text>Example Modal</Text>
+ *         </Modal>
+ *       </Portal>
  *     );
  *   }
  * }
@@ -134,38 +142,38 @@ class Modal extends React.Component<Props, State> {
   render() {
     if (!this.state.rendered) return null;
 
-    const { children, dismissable } = this.props;
+    const { children, dismissable, theme } = this.props;
+    const { colors } = theme;
     return (
-      <ThemedPortal>
-        <Animated.View
-          style={[{ opacity: this.state.opacity }, styles.wrapper]}
+      <Animated.View
+        accessibilityViewIsModal
+        accessibilityLiveRegion="polite"
+        style={[{ opacity: this.state.opacity }, StyleSheet.absoluteFill]}
+      >
+        <TouchableWithoutFeedback
+          onPress={dismissable ? this._hideModal : undefined}
         >
           <View
-            style={[
-              StyleSheet.absoluteFill,
-              { backgroundColor: 'rgba(0, 0, 0, .5)' },
-            ]}
+            style={[styles.backdrop, { backgroundColor: colors.backdrop }]}
           />
-          {dismissable && (
-            <TouchableWithoutFeedback onPress={this._hideModal}>
-              <View style={StyleSheet.absoluteFill} />
-            </TouchableWithoutFeedback>
-          )}
-          <Animated.View style={[{ opacity: this.state.opacity }]}>
-            {children}
-          </Animated.View>
-        </Animated.View>
-      </ThemedPortal>
+        </TouchableWithoutFeedback>
+        <View pointerEvents="box-none" style={styles.content}>
+          {children}
+        </View>
+      </Animated.View>
     );
   }
 }
 
 polyfill(Modal);
 
-export default Modal;
+export default withTheme(Modal);
 
 const styles = StyleSheet.create({
-  wrapper: {
+  backdrop: {
+    flex: 1,
+  },
+  content: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'center',
   },

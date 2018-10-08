@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders list item with avatar 1`] = `
+exports[`renders list item with left and right items 1`] = `
 <View
   accessible={true}
   isTVSelectable={true}
@@ -26,28 +26,13 @@ exports[`renders list item with avatar 1`] = `
       }
     }
   >
-    <View
-      pointerEvents="box-none"
-      style={
-        Array [
-          Object {
-            "margin": 8,
-          },
-          Object {
-            "width": 40,
-          },
-          undefined,
-        ]
-      }
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        GG
-      </Text>
-    </View>
+      GG
+    </Text>
     <View
       pointerEvents="none"
       style={
@@ -72,6 +57,8 @@ exports[`renders list item with avatar 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -86,13 +73,14 @@ exports[`renders list item with avatar 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#ff1744",
-              "paper": "#ffffff",
-              "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.54)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
               "text": "#000000",
             },
             "dark": false,
@@ -102,124 +90,7 @@ exports[`renders list item with avatar 1`] = `
               "regular": "Helvetica Neue",
               "thin": "HelveticaNeue-Thin",
             },
-            "roundness": 2,
-          }
-        }
-      >
-        First Item
-      </Text>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders list item with avatar and icon 1`] = `
-<View
-  accessible={true}
-  isTVSelectable={true}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  style={
-    Array [
-      Object {
-        "padding": 8,
-      },
-      undefined,
-    ]
-  }
->
-  <View
-    style={
-      Object {
-        "flexDirection": "row",
-      }
-    }
-  >
-    <View
-      pointerEvents="box-none"
-      style={
-        Array [
-          Object {
-            "margin": 8,
-          },
-          Object {
-            "width": 40,
-          },
-          Object {
-            "alignItems": "center",
-            "height": 40,
-            "justifyContent": "center",
-          },
-        ]
-      }
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-      >
-        GG
-      </Text>
-    </View>
-    <View
-      pointerEvents="none"
-      style={
-        Array [
-          Object {
-            "margin": 8,
-          },
-          Object {
-            "flex": 1,
-            "justifyContent": "center",
-          },
-        ]
-      }
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "color": "#000000",
-              "fontFamily": "Helvetica Neue",
-            },
-            Array [
-              Object {
-                "fontSize": 16,
-              },
-              Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-              },
-            ],
-          ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#ff1744",
-              "paper": "#ffffff",
-              "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 2,
+            "roundness": 4,
           }
         }
       >
@@ -235,6 +106,8 @@ exports[`renders list item with avatar and icon 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -249,13 +122,14 @@ exports[`renders list item with avatar and icon 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#ff1744",
-              "paper": "#ffffff",
-              "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.54)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
               "text": "#000000",
             },
             "dark": false,
@@ -265,7 +139,7 @@ exports[`renders list item with avatar and icon 1`] = `
               "regular": "Helvetica Neue",
               "thin": "HelveticaNeue-Thin",
             },
-            "roundness": 2,
+            "roundness": 4,
           }
         }
       >
@@ -277,20 +151,22 @@ exports[`renders list item with avatar and icon 1`] = `
       style={
         Array [
           Object {
-            "margin": 8,
-          },
-          Object {
             "alignItems": "center",
             "height": 40,
             "justifyContent": "center",
+            "margin": 8,
+            "width": 40,
           },
+          undefined,
         ]
       }
     >
       <Text
+        accessibilityElementsHidden={true}
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
           Array [
@@ -298,9 +174,18 @@ exports[`renders list item with avatar and icon 1`] = `
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            Object {
-              "backgroundColor": "transparent",
-            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -316,7 +201,7 @@ exports[`renders list item with avatar and icon 1`] = `
 </View>
 `;
 
-exports[`renders list item with icon 1`] = `
+exports[`renders list item with left item 1`] = `
 <View
   accessible={true}
   isTVSelectable={true}
@@ -347,9 +232,10 @@ exports[`renders list item with icon 1`] = `
       style={
         Array [
           Object {
+            "alignItems": "center",
+            "height": 40,
+            "justifyContent": "center",
             "margin": 8,
-          },
-          Object {
             "width": 40,
           },
           undefined,
@@ -357,9 +243,11 @@ exports[`renders list item with icon 1`] = `
       }
     >
       <Text
+        accessibilityElementsHidden={true}
         accessible={true}
         allowFontScaling={false}
         ellipsizeMode="tail"
+        importantForAccessibility="no-hide-descendants"
         pointerEvents="none"
         style={
           Array [
@@ -367,9 +255,18 @@ exports[`renders list item with icon 1`] = `
               "color": "rgba(0, 0, 0, 0.54)",
               "fontSize": 24,
             },
-            Object {
-              "backgroundColor": "transparent",
-            },
+            Array [
+              Object {
+                "transform": Array [
+                  Object {
+                    "scaleX": 1,
+                  },
+                ],
+              },
+              Object {
+                "backgroundColor": "transparent",
+              },
+            ],
             Object {
               "fontFamily": "Material Icons",
               "fontStyle": "normal",
@@ -405,6 +302,8 @@ exports[`renders list item with icon 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -419,13 +318,14 @@ exports[`renders list item with icon 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#ff1744",
-              "paper": "#ffffff",
-              "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.54)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
               "text": "#000000",
             },
             "dark": false,
@@ -435,13 +335,114 @@ exports[`renders list item with icon 1`] = `
               "regular": "Helvetica Neue",
               "thin": "HelveticaNeue-Thin",
             },
-            "roundness": 2,
+            "roundness": 4,
           }
         }
       >
         First Item
       </Text>
     </View>
+  </View>
+</View>
+`;
+
+exports[`renders list item with right item 1`] = `
+<View
+  accessible={true}
+  isTVSelectable={true}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "padding": 8,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Array [
+          Object {
+            "margin": 8,
+          },
+          Object {
+            "flex": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#000000",
+              "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "fontSize": 16,
+              },
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+              },
+            ],
+          ]
+        }
+        theme={
+          Object {
+            "colors": Object {
+              "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
+              "background": "#f6f6f6",
+              "disabled": "rgba(0, 0, 0, 0.26)",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.54)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
+              "text": "#000000",
+            },
+            "dark": false,
+            "fonts": Object {
+              "light": "HelveticaNeue-Light",
+              "medium": "HelveticaNeue-Medium",
+              "regular": "Helvetica Neue",
+              "thin": "HelveticaNeue-Thin",
+            },
+            "roundness": 4,
+          }
+        }
+      >
+        First Item
+      </Text>
+    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    >
+      GG
+    </Text>
   </View>
 </View>
 `;
@@ -496,6 +497,8 @@ exports[`renders list item with title and description 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -510,13 +513,14 @@ exports[`renders list item with title and description 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#ff1744",
-              "paper": "#ffffff",
-              "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.54)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
               "text": "#000000",
             },
             "dark": false,
@@ -526,7 +530,7 @@ exports[`renders list item with title and description 1`] = `
               "regular": "Helvetica Neue",
               "thin": "HelveticaNeue-Thin",
             },
-            "roundness": 2,
+            "roundness": 4,
           }
         }
       >
@@ -542,6 +546,8 @@ exports[`renders list item with title and description 1`] = `
             Object {
               "color": "#000000",
               "fontFamily": "Helvetica Neue",
+              "textAlign": "left",
+              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -556,13 +562,14 @@ exports[`renders list item with title and description 1`] = `
         theme={
           Object {
             "colors": Object {
-              "accent": "#ff4081",
-              "background": "#fafafa",
+              "accent": "#03dac4",
+              "backdrop": "rgba(0, 0, 0, 0.5)",
+              "background": "#f6f6f6",
               "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#ff1744",
-              "paper": "#ffffff",
-              "placeholder": "rgba(0, 0, 0, 0.38)",
-              "primary": "#3f51b5",
+              "error": "#B00020",
+              "placeholder": "rgba(0, 0, 0, 0.54)",
+              "primary": "#6200ee",
+              "surface": "#ffffff",
               "text": "#000000",
             },
             "dark": false,
@@ -572,7 +579,7 @@ exports[`renders list item with title and description 1`] = `
               "regular": "Helvetica Neue",
               "thin": "HelveticaNeue-Thin",
             },
-            "roundness": 2,
+            "roundness": 4,
           }
         }
       >

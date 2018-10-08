@@ -3,12 +3,10 @@
 import color from 'color';
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Icon from '../Icon';
 import TouchableRipple from '../TouchableRipple';
 import Text from '../Typography/Text';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
-import type { IconSource } from '../Icon';
 
 type Props = {
   /**
@@ -20,13 +18,13 @@ type Props = {
    */
   description?: React.Node,
   /**
-   * Icon to display for the `ListItem`.
+   * Callback which returns a React element to display on the left side.
    */
-  icon?: IconSource,
+  left?: (props: { color: string }) => React.Node,
   /**
-   * Component to display as avatar image.
+   * Callback which returns a React element to display on the right side.
    */
-  avatar?: React.Node,
+  right?: (props: { color: string }) => React.Node,
   /**
    * Function to execute on press.
    */
@@ -39,7 +37,7 @@ type Props = {
 };
 
 /**
- * ListItem can be used to show tiles inside a List.
+ * A component to show tiles inside a List.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/list-item-1.png" />
@@ -50,18 +48,26 @@ type Props = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListItem } from 'react-native-paper';
+ * import { List } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ListItem title="First Item" description="Item description" icon="folder" />
+ *   <List.Item
+ *     title="First Item"
+ *     description="Item description"
+ *     left={props => <List.Icon {...props} icon="folder" />}
+ *   />
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class ListItem extends React.Component<Props> {
+  static displayName = 'List.Item';
+
   render() {
     const {
-      icon,
-      avatar,
+      left,
+      right,
       title,
       description,
       onPress,
@@ -85,20 +91,7 @@ class ListItem extends React.Component<Props> {
         onPress={onPress}
       >
         <View style={styles.row}>
-          {avatar || icon ? (
-            <View
-              style={[
-                styles.item,
-                styles.avatar,
-                description && styles.multiline,
-              ]}
-              pointerEvents="box-none"
-            >
-              {avatar || (
-                <Icon name={icon} size={24} color={descriptionColor} />
-              )}
-            </View>
-          ) : null}
+          {left ? left({ color: descriptionColor }) : null}
           <View style={[styles.item, styles.content]} pointerEvents="none">
             <Text
               numberOfLines={1}
@@ -120,14 +113,7 @@ class ListItem extends React.Component<Props> {
               </Text>
             ) : null}
           </View>
-          {avatar && icon ? (
-            <View
-              style={[styles.item, description && styles.multiline]}
-              pointerEvents="box-none"
-            >
-              <Icon name={icon} size={24} color={descriptionColor} />
-            </View>
-          ) : null}
+          {right ? right({ color: descriptionColor }) : null}
         </View>
       </TouchableRipple>
     );
@@ -140,14 +126,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-  },
-  avatar: {
-    width: 40,
-  },
-  multiline: {
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 16,

@@ -9,15 +9,19 @@ export default class Home extends React.Component<{}> {
   render() {
     return (
       <div {...styles(container)}>
+        <p {...styles(banner)}>
+          Looking for the documentation for version 1.0? You can find it{' '}
+          <a href="1.0">here</a>.
+        </p>
         <div {...styles(cover)}>
           <img
             {...styles(logo)}
-            src="images/paper-color.png"
+            src="images/paper-logo.svg"
             alt="React Native Paper"
           />
           <p>Cross-platform Material Design for React Native</p>
           <div {...styles(buttons)}>
-            <Link {...styles(button, primary)} to="getting-started.html">
+            <Link {...styles(button, primary)} to="getting-started">
               Get started
             </Link>
             <a
@@ -46,13 +50,20 @@ export default class Home extends React.Component<{}> {
   }
 }
 
+const banner = css`
+  margin: 0;
+  padding: 10px 16px;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+`;
+
 const logo = css`
   max-height: 125px;
   width: auto;
 `;
 
 const elevated = css`
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.24);
 `;
 
 const container = css`
@@ -82,40 +93,47 @@ const button = css`
   margin: 8px;
   min-width: 120px;
   font-size: 13px;
+  font-weight: 600;
   text-align: center;
   text-transform: uppercase;
-  padding: 9px 16px;
-  border: 0;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 3px;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   transition: 0.3s;
 
   &:hover {
-    ${include(elevated)};
+    text-decoration: none;
   }
 `;
 
 const primary = css`
-  background-color: #3748ac;
+  background-color: #6200ee;
+  border-color: #6200ee;
   color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 
   &:hover,
   &:focus,
   &:active {
+    ${include(elevated)};
+
     color: #fff;
   }
 `;
 
 const secondary = css`
-  background-color: #fafafa;
-  color: #222;
-  font-weight: 600;
+  background-color: transparent;
+  border-color: rgba(0, 0, 0, 0.24);
+  color: #6200ee;
 
   &:hover,
   &:focus,
   &:active {
-    color: #222;
+    background-color: rgba(98, 0, 238, 0.08);
+    color: #6200ee;
   }
 `;
 
@@ -139,11 +157,15 @@ const gallery = css`
 
 const screenshots = [
   'gallery/button.png',
-  'gallery/card.png',
   'gallery/input.png',
+  'gallery/card.png',
+  'gallery/appbar.png',
   'gallery/searchbar.png',
+  'gallery/snackbar.png',
+  'gallery/chip.png',
+  'gallery/list.png',
+  'gallery/list-accordion.png',
   'gallery/typography.png',
-  'gallery/checkbox.png',
-  'gallery/radio.png',
-  'gallery/switch.png',
+  'gallery/bottom-navigation.png',
+  'gallery/fab.png',
 ];

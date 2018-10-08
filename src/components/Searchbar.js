@@ -4,9 +4,9 @@ import * as React from 'react';
 import { StyleSheet, TextInput } from 'react-native';
 
 import color from 'color';
-import withTheme from '../core/withTheme';
-import TouchableIcon from './TouchableIcon';
-import Paper from './Paper';
+import IconButton from './IconButton';
+import Surface from './Surface';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
@@ -47,7 +47,7 @@ type Props = {
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { Searchbar } from 'react-native-paper';
  *
  * export default class MyComponent extends React.Component {
@@ -74,41 +74,41 @@ class Searchbar extends React.Component<Props> {
     this.props.onChangeText && this.props.onChangeText('');
   };
 
-  _root: TextInput;
+  _root: ?TextInput;
 
   /**
    * @internal
    */
   setNativeProps(...args) {
-    return this._root.setNativeProps(...args);
+    return this._root && this._root.setNativeProps(...args);
   }
 
   /**
    * Returns `true` if the input is currently focused, `false` otherwise.
    */
   isFocused() {
-    return this._root.isFocused();
+    return this._root && this._root.isFocused();
   }
 
   /**
    * Removes all text from the TextInput.
    */
   clear() {
-    return this._root.clear();
+    return this._root && this._root.clear();
   }
 
   /**
    * Focuses the input.
    */
   focus() {
-    return this._root.focus();
+    return this._root && this._root.focus();
   }
 
   /**
    * Removes focus from the input.
    */
   blur() {
-    return this._root.blur();
+    return this._root && this._root.blur();
   }
 
   render() {
@@ -135,19 +135,19 @@ class Searchbar extends React.Component<Props> {
       .string();
 
     return (
-      <Paper
+      <Surface
         style={[
           { borderRadius: roundness, elevation: 4 },
           styles.container,
           style,
         ]}
       >
-        <TouchableIcon
+        <IconButton
           borderless
           rippleColor={rippleColor}
           onPress={onIconPress}
           color={iconColor}
-          name={icon || 'search'}
+          icon={icon || 'search'}
         />
         <TextInput
           style={[styles.input, { color: textColor }]}
@@ -156,6 +156,8 @@ class Searchbar extends React.Component<Props> {
           selectionColor={colors.primary}
           underlineColorAndroid="transparent"
           returnKeyType="search"
+          accessibilityTraits="search"
+          accessibilityRole="search"
           ref={c => {
             this._root = c;
           }}
@@ -163,15 +165,18 @@ class Searchbar extends React.Component<Props> {
           {...rest}
         />
         {value ? (
-          <TouchableIcon
+          <IconButton
             borderless
             color={iconColor}
             rippleColor={rippleColor}
             onPress={this._handleClearPress}
-            name="close"
+            icon="close"
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
+            accessibilityRole="button"
           />
         ) : null}
-      </Paper>
+      </Surface>
     );
   }
 }
@@ -180,12 +185,12 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 4,
   },
   input: {
     flex: 1,
     fontSize: 18,
     paddingLeft: 8,
+    alignSelf: 'stretch',
   },
 });
 

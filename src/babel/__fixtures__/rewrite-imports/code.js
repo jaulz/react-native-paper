@@ -3,9 +3,11 @@ import {
   Provider as PaperProvider,
   BottomNavigation,
   Button,
-  CardCover,
-  Toolbar,
+  FAB,
+  Appbar,
   Colors,
   NonExistent,
   NonExistentSecond as Stuff,
+  ThemeProvider,
+  withTheme,
 } from 'react-native-paper';

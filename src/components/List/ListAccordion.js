@@ -6,7 +6,7 @@ import { View, StyleSheet } from 'react-native';
 import TouchableRipple from '../TouchableRipple';
 import Icon from '../Icon';
 import Text from '../Typography/Text';
-import withTheme from '../../core/withTheme';
+import { withTheme } from '../../core/theming';
 import type { Theme } from '../../types';
 
 type Props = {
@@ -19,15 +19,13 @@ type Props = {
    */
   description?: React.Node,
   /**
-   * Icon to display for the `ListAccordion`.
+   * Callback which returns a React element to display on the left side.
    */
-  icon?: React.Node,
-
+  left?: (props: { color: string }) => React.Node,
   /**
    * Content of the section.
    */
   children: React.Node,
-
   /**
    * @optional
    */
@@ -40,7 +38,7 @@ type State = {
 };
 
 /**
- * `ListAccordion` can be used to display an expandable list item.
+ * A component used to display an expandable list item.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/list-accordion-1.png" />
@@ -51,20 +49,24 @@ type State = {
  * ## Usage
  * ```js
  * import * as React from 'react';
- * import { ListAccordion, ListItem, Checkbox } from 'react-native-paper';
+ * import { List, Checkbox } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <ListAccordion
+ *   <List.Accordion
  *     title="Accordion"
- *     icon="folder"
+ *     left={props => <List.Icon {...props} icon="folder" />}
  *   >
- *     <ListItem title="First item" />
- *     <ListItem title="Second item" />
- *   </ListAccordion>
+ *     <List.Item title="First item" />
+ *     <List.Item title="Second item" />
+ *   </List.Accordion>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class ListAccordion extends React.Component<Props, State> {
+  static displayName = 'List.Accordion';
+
   state = {
     expanded: false,
   };
@@ -75,7 +77,7 @@ class ListAccordion extends React.Component<Props, State> {
     }));
 
   render() {
-    const { icon, title, description, children, theme, style } = this.props;
+    const { left, title, description, children, theme, style } = this.props;
     const titleColor = color(theme.colors.text)
       .alpha(0.87)
       .rgb()
@@ -90,27 +92,18 @@ class ListAccordion extends React.Component<Props, State> {
         <TouchableRipple
           style={[styles.container, style]}
           onPress={this._handlePress}
+          accessibilityTraits="button"
+          accessibilityComponentType="button"
+          accessibilityRole="button"
         >
           <View style={styles.row} pointerEvents="none">
-            {icon ? (
-              <View
-                style={[
-                  styles.item,
-                  styles.icon,
-                  description && styles.multiline,
-                ]}
-              >
-                <Icon
-                  name={icon}
-                  size={24}
-                  color={
-                    this.state.expanded
-                      ? theme.colors.primary
-                      : descriptionColor
-                  }
-                />
-              </View>
-            ) : null}
+            {left
+              ? left({
+                  color: this.state.expanded
+                    ? theme.colors.primary
+                    : descriptionColor,
+                })
+              : null}
             <View style={[styles.item, styles.content]}>
               <Text
                 numberOfLines={1}
@@ -141,7 +134,7 @@ class ListAccordion extends React.Component<Props, State> {
             </View>
             <View style={[styles.item, description && styles.multiline]}>
               <Icon
-                name={
+                source={
                   this.state.expanded
                     ? 'keyboard-arrow-up'
                     : 'keyboard-arrow-down'
@@ -155,10 +148,10 @@ class ListAccordion extends React.Component<Props, State> {
         {this.state.expanded
           ? React.Children.map(children, child => {
               if (
-                icon &&
+                left &&
                 React.isValidElement(child) &&
-                !child.props.icon &&
-                !child.props.avatar
+                !child.props.left &&
+                !child.props.right
               ) {
                 return React.cloneElement(child, {
                   style: [styles.child, child.props.style],
@@ -179,9 +172,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-  },
-  icon: {
-    width: 40,
   },
   multiline: {
     height: 40,

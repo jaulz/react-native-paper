@@ -4,7 +4,7 @@ import * as React from 'react';
 import color from 'color';
 import { Animated, StyleSheet } from 'react-native';
 import Text from './Typography/Text';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
@@ -46,7 +46,7 @@ type State = {
  * import * as React from 'react';
  * import { HelperText, TextInput } from 'react-native-paper';
  *
- * class MyComponent extends React.Component {
+ * export default class MyComponent extends React.Component {
  *   state = {
  *     text: ''
  *   };
@@ -96,6 +96,7 @@ class HelperText extends React.PureComponent<Props, State> {
     Animated.timing(this.state.shown, {
       toValue: 1,
       duration: 150,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -103,6 +104,7 @@ class HelperText extends React.PureComponent<Props, State> {
     Animated.timing(this.state.shown, {
       toValue: 0,
       duration: 180,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -137,7 +139,7 @@ class HelperText extends React.PureComponent<Props, State> {
                     {
                       translateY: this.state.shown.interpolate({
                         inputRange: [0, 1],
-                        outputRange: [-this.state.textHeight, 0],
+                        outputRange: [-this.state.textHeight / 2, 0],
                       }),
                     },
                   ]
@@ -156,6 +158,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 12,
     paddingVertical: 4,
+    paddingHorizontal: 12,
   },
 });
 

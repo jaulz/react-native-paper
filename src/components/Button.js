@@ -4,37 +4,34 @@ import * as React from 'react';
 import { ActivityIndicator, Animated, View, StyleSheet } from 'react-native';
 import color from 'color';
 import Icon from './Icon';
-import Paper from './Paper';
+import Surface from './Surface';
 import Text from './Typography/Text';
 import TouchableRipple from './TouchableRipple';
 import { black, white } from '../styles/colors';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import type { Theme } from '../types';
 import type { IconSource } from './Icon';
 
-const AnimatedPaper = Animated.createAnimatedComponent(Paper);
-
 type Props = {
   /**
-   * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
+   * Mode of the button. You can change the mode to adjust the styling to give it desired emphasis.
+   * - `text` - flat button without background or outline (low emphasis)
+   * - `outlined` - button with an outline (medium emphasis)
+   * - `contained` - button with a background color and elevation shadow (high emphasis)
    */
-  disabled?: boolean,
+  mode?: 'text' | 'outlined' | 'contained',
   /**
-   * Use a compact look, useful for flat buttons in a row.
+   * Whether the color is a dark color. A dark button will render light text and vice-versa. Only applicable for `contained` mode.
+   */
+  dark?: boolean,
+  /**
+   * Use a compact look, useful for `text` buttons in a row.
    */
   compact?: boolean,
   /**
-   * Add elevation to button, as opposed to default flat appearance. Typically used on a flat surface.
+   * Custom text color for flat button, or background color for contained button.
    */
-  raised?: boolean,
-  /**
-   * Use to primary color from theme. Typically used to emphasize an action.
-   */
-  primary?: boolean,
-  /**
-   * Text color of button, a dark button will render light text and vice-versa.
-   */
-  dark?: boolean,
+  color?: string,
   /**
    * Whether to show a loading indicator.
    */
@@ -44,13 +41,17 @@ type Props = {
    */
   icon?: IconSource,
   /**
-   * Custom text color for flat button, or background color for raised button.
+   * Whether the button is disabled. A disabled button is greyed out and `onPress` is not called on touch.
    */
-  color?: string,
+  disabled?: boolean,
   /**
    * Label text of the button.
    */
-  children: string | Array<string>,
+  children: React.Node,
+  /**
+   * Accessibility label for the button. This is read by the screen reader when the user taps the button.
+   */
+  accessibilityLabel?: string,
   /**
    * Function to execute on press.
    */
@@ -70,9 +71,18 @@ type State = {
  * A button is component that the user can press to trigger an action.
  *
  * <div class="screenshots">
- *   <img src="screenshots/button-1.png" />
- *   <img src="screenshots/button-2.png" />
- *   <img src="screenshots/button-3.png" />
+ *   <figure>
+ *     <img src="screenshots/button-1.png" />
+ *     <figcaption>Text button</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/button-2.png" />
+ *     <figcaption>Outlined button</figcaption>
+ *   </figure>
+ *   <figure>
+ *     <img src="screenshots/button-3.png" />
+ *     <figcaption>Contained button</figcaption>
+ *   </figure>
  * </div>
  *
  * ## Usage
@@ -81,19 +91,25 @@ type State = {
  * import { Button } from 'react-native-paper';
  *
  * const MyComponent = () => (
- *   <Button raised onPress={() => console.log('Pressed')}>
+ *   <Button icon="add-a-photo" mode="contained" onPress={() => console.log('Pressed')}>
  *     Press me
  *   </Button>
  * );
+ *
+ * export default MyComponent;
  * ```
  */
 class Button extends React.Component<Props, State> {
+  static defaultProps = {
+    mode: 'text',
+  };
+
   state = {
-    elevation: new Animated.Value(this.props.raised ? 2 : 0),
+    elevation: new Animated.Value(this.props.mode === 'contained' ? 2 : 0),
   };
 
   _handlePressIn = () => {
-    if (this.props.raised) {
+    if (this.props.mode === 'contained') {
       Animated.timing(this.state.elevation, {
         toValue: 8,
         duration: 200,
@@ -102,7 +118,7 @@ class Button extends React.Component<Props, State> {
   };
 
   _handlePressOut = () => {
-    if (this.props.raised) {
+    if (this.props.mode === 'contained') {
       Animated.timing(this.state.elevation, {
         toValue: 2,
         duration: 150,
@@ -114,13 +130,13 @@ class Button extends React.Component<Props, State> {
     const {
       disabled,
       compact,
-      raised,
-      primary,
+      mode,
       dark,
       loading,
       icon,
       color: buttonColor,
       children,
+      accessibilityLabel,
       onPress,
       style,
       theme,
@@ -129,9 +145,9 @@ class Button extends React.Component<Props, State> {
     const { colors, roundness } = theme;
     const fontFamily = theme.fonts.medium;
 
-    let backgroundColor, textColor, isDark;
+    let backgroundColor, borderColor, textColor, borderWidth;
 
-    if (raised) {
+    if (mode === 'contained') {
       if (disabled) {
         backgroundColor = color(theme.dark ? white : black)
           .alpha(0.12)
@@ -139,55 +155,64 @@ class Button extends React.Component<Props, State> {
           .string();
       } else if (buttonColor) {
         backgroundColor = buttonColor;
-      } else if (primary) {
-        backgroundColor = colors.primary;
       } else {
-        backgroundColor = theme.dark ? '#535354' : white;
+        backgroundColor = colors.primary;
       }
     } else {
       backgroundColor = 'transparent';
     }
 
-    if (typeof dark === 'boolean') {
-      isDark = dark;
+    if (mode === 'outlined') {
+      borderColor = color(theme.dark ? white : black)
+        .alpha(0.29)
+        .rgb()
+        .string();
+      borderWidth = StyleSheet.hairlineWidth;
     } else {
-      isDark =
-        backgroundColor === 'transparent'
-          ? false
-          : !color(backgroundColor).light();
+      borderColor = 'transparent';
+      borderWidth = 0;
     }
 
     if (disabled) {
-      textColor = theme.dark
-        ? color(white)
-            .alpha(0.3)
-            .rgb()
-            .string()
-        : color(black)
-            .alpha(0.26)
-            .rgb()
-            .string();
-    } else if (raised) {
+      textColor = color(theme.dark ? white : black)
+        .alpha(0.32)
+        .rgb()
+        .string();
+    } else if (mode === 'contained') {
+      let isDark;
+
+      if (typeof dark === 'boolean') {
+        isDark = dark;
+      } else {
+        isDark =
+          backgroundColor === 'transparent'
+            ? false
+            : !color(backgroundColor).light();
+      }
+
       textColor = isDark ? white : black;
     } else if (buttonColor) {
       textColor = buttonColor;
-    } else if (primary) {
-      textColor = colors.primary;
     } else {
-      textColor = theme.dark ? white : black;
+      textColor = colors.primary;
     }
 
     const rippleColor = color(textColor)
       .alpha(0.32)
       .rgb()
       .string();
-    const buttonStyle = { backgroundColor, borderRadius: roundness };
+    const buttonStyle = {
+      backgroundColor,
+      borderColor,
+      borderWidth,
+      borderRadius: roundness,
+    };
     const touchableStyle = { borderRadius: roundness };
     const textStyle = { color: textColor, fontFamily };
     const elevation = disabled ? 0 : this.state.elevation;
 
     return (
-      <AnimatedPaper
+      <Surface
         {...rest}
         style={[
           styles.button,
@@ -200,16 +225,22 @@ class Button extends React.Component<Props, State> {
         <TouchableRipple
           borderless
           delayPressIn={0}
-          onPress={disabled ? undefined : onPress}
-          onPressIn={disabled ? undefined : this._handlePressIn}
-          onPressOut={disabled ? undefined : this._handlePressOut}
+          onPress={onPress}
+          onPressIn={this._handlePressIn}
+          onPressOut={this._handlePressOut}
+          accessibilityLabel={accessibilityLabel}
+          accessibilityTraits={disabled ? ['button', 'disabled'] : 'button'}
+          accessibilityComponentType="button"
+          accessibilityRole="button"
+          accessibilityStates={disabled ? ['disabled'] : undefined}
+          disabled={disabled}
           rippleColor={rippleColor}
           style={touchableStyle}
         >
           <View style={styles.content}>
             {icon && loading !== true ? (
               <View style={styles.icon}>
-                <Icon name={icon} size={16} color={textColor} />
+                <Icon source={icon} size={16} color={textColor} />
               </View>
             ) : null}
             {loading ? (
@@ -236,18 +267,18 @@ class Button extends React.Component<Props, State> {
             </Text>
           </View>
         </TouchableRipple>
-      </AnimatedPaper>
+      </Surface>
     );
   }
 }
 
 const styles = StyleSheet.create({
   button: {
-    margin: 4,
-    minWidth: 88,
+    minWidth: 64,
+    borderStyle: 'solid',
   },
   compact: {
-    minWidth: 64,
+    minWidth: 'auto',
   },
   content: {
     flexDirection: 'row',
@@ -261,6 +292,7 @@ const styles = StyleSheet.create({
   },
   label: {
     textAlign: 'center',
+    letterSpacing: 1,
     marginVertical: 9,
     marginHorizontal: 16,
   },

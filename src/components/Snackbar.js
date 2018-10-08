@@ -1,11 +1,11 @@
 /* @flow */
 
 import * as React from 'react';
-import { StyleSheet, Animated } from 'react-native';
+import { StyleSheet, Animated, View, SafeAreaView } from 'react-native';
 
+import Button from './Button';
 import Text from './Typography/Text';
-import ThemedPortal from './Portal/ThemedPortal';
-import withTheme from '../core/withTheme';
+import { withTheme } from '../core/theming';
 import { white } from '../styles/colors';
 import type { Theme } from '../types';
 
@@ -43,22 +43,16 @@ type Props = {
 };
 
 type State = {
-  layout: {
-    height: number,
-    measured: boolean,
-  },
   opacity: Animated.Value,
-  translateY: Animated.Value,
+  hidden: boolean,
 };
 
-const SNACKBAR_ANIMATION_DURATION = 250;
-
-const DURATION_SHORT = 2500;
-const DURATION_LONG = 3500;
-const DURATION_INDEFINITE = Infinity;
+const DURATION_SHORT = 4000;
+const DURATION_MEDIUM = 7000;
+const DURATION_LONG = 10000;
 
 /**
- * Snackbar provide brief feedback about an operation through a message at the bottom of the screen.
+ * Snackbars provide brief feedback about an operation through a message at the bottom of the screen.
  *
  * <div class="screenshots">
  *   <img class="medium" src="screenshots/snackbar.gif" />
@@ -66,7 +60,7 @@ const DURATION_INDEFINITE = Infinity;
  *
  * ## Usage
  * ```js
- * import React from 'react';
+ * import * as React from 'react';
  * import { StyleSheet } from 'react-native';
  * import { Snackbar } from 'react-native-paper';
  *
@@ -80,7 +74,6 @@ const DURATION_INDEFINITE = Infinity;
  *     return (
  *       <View style={styles.container}>
  *         <Button
- *           raised
  *           onPress={() => this.setState(state => ({ visible: !state.visible }))}
  *         >
  *           {this.state.visible ? 'Hide' : 'Show'}
@@ -117,26 +110,22 @@ class Snackbar extends React.Component<Props, State> {
   static DURATION_SHORT = DURATION_SHORT;
 
   /**
+   * Show the Snackbar for a medium duration.
+   */
+  static DURATION_MEDIUM = DURATION_MEDIUM;
+
+  /**
    * Show the Snackbar for a long duration.
    */
   static DURATION_LONG = DURATION_LONG;
 
-  /**
-   * Show the Snackbar for indefinite amount of time.
-   */
-  static DURATION_INDEFINITE = DURATION_INDEFINITE;
-
   static defaultProps = {
-    duration: DURATION_LONG,
+    duration: DURATION_MEDIUM,
   };
 
   state = {
-    layout: {
-      height: 0,
-      measured: false,
-    },
-    opacity: new Animated.Value(0),
-    translateY: new Animated.Value(0),
+    opacity: new Animated.Value(0.0),
+    hidden: !this.props.visible,
   };
 
   componentDidUpdate(prevProps) {
@@ -149,31 +138,6 @@ class Snackbar extends React.Component<Props, State> {
     clearTimeout(this._hideTimeout);
   }
 
-  _hideTimeout: TimeoutID;
-
-  _handleLayout = e => {
-    const { height } = e.nativeEvent.layout;
-    const { measured } = this.state.layout;
-
-    this.setState({ layout: { height, measured: true } }, () => {
-      if (measured) {
-        if (!this.props.visible) {
-          // If height changed and Snackbar was hidden, adjust the translate to keep it hidden
-          this.state.translateY.setValue(height);
-        }
-      } else {
-        // Set the appropriate initial values if height was previously unknown
-        this.state.translateY.setValue(height);
-        this.state.opacity.setValue(0);
-
-        // Perform the animation only if we're showing
-        if (this.props.visible) {
-          this._show();
-        }
-      }
-    });
-  };
-
   _toggle = () => {
     if (this.props.visible) {
       this._show();
@@ -184,123 +148,108 @@ class Snackbar extends React.Component<Props, State> {
 
   _show = () => {
     clearTimeout(this._hideTimeout);
-
-    Animated.parallel([
-      Animated.timing(this.state.opacity, {
-        toValue: 1,
-        duration: SNACKBAR_ANIMATION_DURATION,
-        useNativeDriver: true,
-      }),
-      Animated.timing(this.state.translateY, {
-        toValue: 0,
-        duration: SNACKBAR_ANIMATION_DURATION,
-        useNativeDriver: true,
-      }),
-    ]).start(() => {
+    this.setState({
+      hidden: false,
+    });
+    Animated.timing(this.state.opacity, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => {
       const { duration } = this.props;
-
-      if (duration !== DURATION_INDEFINITE) {
-        this._hideTimeout = setTimeout(this.props.onDismiss, duration);
-      }
+      this._hideTimeout = setTimeout(this.props.onDismiss, duration);
     });
   };
 
   _hide = () => {
     clearTimeout(this._hideTimeout);
 
-    Animated.parallel([
-      Animated.timing(this.state.opacity, {
-        toValue: 0,
-        duration: SNACKBAR_ANIMATION_DURATION,
-        useNativeDriver: true,
-      }),
-      Animated.timing(this.state.translateY, {
-        toValue: this.state.layout.height,
-        duration: SNACKBAR_ANIMATION_DURATION,
-        useNativeDriver: true,
-      }),
-    ]).start();
+    Animated.timing(this.state.opacity, {
+      toValue: 0,
+      duration: 100,
+      useNativeDriver: true,
+    }).start(() => this.setState({ hidden: true }));
   };
 
-  render() {
-    const { children, action, onDismiss, theme, style } = this.props;
-    const { fonts, colors } = theme;
+  _hideTimeout: TimeoutID;
 
+  render() {
+    const { children, visible, action, onDismiss, theme, style } = this.props;
+    const { colors, roundness } = theme;
     return (
-      <ThemedPortal>
+      <SafeAreaView pointerEvents="box-none" style={styles.wrapper}>
         <Animated.View
-          onLayout={this._handleLayout}
-          style={[
-            styles.wrapper,
-            {
-              opacity: this.state.layout.measured ? 1 : 0,
-              transform: [
-                {
-                  translateY: this.state.translateY,
-                },
-              ],
-            },
-            style,
-          ]}
-        >
-          <Animated.View
-            style={[
-              styles.container,
+          pointerEvents="box-none"
+          accessibilityLiveRegion="polite"
+          style={{
+            opacity: this.state.opacity,
+            transform: [
               {
-                opacity: this.state.opacity.interpolate({
-                  inputRange: [0, 0.8, 1],
-                  outputRange: [0, 0.2, 1],
-                }),
+                scale: visible
+                  ? this.state.opacity.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [0.9, 1],
+                    })
+                  : 1,
               },
-            ]}
-          >
-            <Text style={[styles.content, { marginRight: action ? 0 : 24 }]}>
-              {children}
-            </Text>
-            {action ? (
-              <Text
-                style={[
-                  styles.button,
-                  { color: colors.accent, fontFamily: fonts.medium },
-                ]}
-                onPress={() => {
-                  action.onPress();
-                  onDismiss();
-                }}
-              >
-                {action.label.toUpperCase()}
+            ],
+          }}
+        >
+          {!this.state.hidden ? (
+            <View
+              pointerEvents="box-none"
+              style={[styles.container, { borderRadius: roundness }, style]}
+            >
+              <Text style={[styles.content, { marginRight: action ? 0 : 16 }]}>
+                {children}
               </Text>
-            ) : null}
-          </Animated.View>
+              {action ? (
+                <Button
+                  onPress={() => {
+                    action.onPress();
+                    onDismiss();
+                  }}
+                  style={styles.button}
+                  color={colors.accent}
+                  compact
+                  mode="text"
+                >
+                  {action.label.toUpperCase()}
+                </Button>
+              ) : null}
+            </View>
+          ) : null}
         </Animated.View>
-      </ThemedPortal>
+      </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#323232',
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    elevation: 6,
   },
   container: {
+    elevation: 6,
+    backgroundColor: '#323232',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    margin: 8,
+    borderRadius: 4,
   },
   content: {
     color: white,
-    marginLeft: 24,
+    marginLeft: 16,
     marginVertical: 14,
     flexWrap: 'wrap',
     flex: 1,
   },
   button: {
-    paddingHorizontal: 24,
-    paddingVertical: 14,
+    marginHorizontal: 8,
+    marginVertical: 6,
   },
 });
 
