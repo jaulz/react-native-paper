@@ -1,16 +1,22 @@
-/* @flow */
-
 import * as React from 'react';
 import renderer from 'react-test-renderer';
-import BottomNavigation from '../BottomNavigation';
+import BottomNavigation from '../BottomNavigation.tsx';
 
-const icons = [
-  '3d-rotation',
-  'ac-unit',
-  'access-alarm',
-  'access-alarms',
-  'access-time',
-];
+// Make sure any animation finishes before checking the snapshot results
+jest.mock('react-native', () => {
+  const RN = jest.requireActual('react-native');
+
+  RN.Animated.timing = (value, config) => ({
+    start: callback => {
+      value.setValue(config.toValue);
+      callback && callback({ finished: true });
+    },
+  });
+
+  return RN;
+});
+
+const icons = ['magnify', 'camera', 'inbox', 'heart', 'shopping-music'];
 
 const createState = (index, length) => ({
   index,

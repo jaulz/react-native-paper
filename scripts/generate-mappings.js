@@ -3,26 +3,26 @@
 const path = require('path');
 const fs = require('fs');
 const types = require('babel-types');
-const babylon = require('babylon');
+const parser = require('@babel/parser');
 
-const output = path.join(__dirname, '../dist/mappings.json');
-const source = fs.readFileSync(require.resolve('..'), 'utf8');
-const ast = babylon.parse(source, {
+const packageJson = require('../package.json');
+const root = path.resolve(__dirname, '..');
+const output = path.join(root, 'lib/mappings.json');
+const source = fs.readFileSync(path.resolve(root, 'src', 'index.tsx'), 'utf8');
+const ast = parser.parse(source, {
   sourceType: 'module',
   plugins: [
     'jsx',
-    'flow',
+    'typescript',
     'objectRestSpread',
     'classProperties',
     'asyncGenerators',
   ],
 });
 
+const index = packageJson.module;
 const relative = (value /* : string */) =>
-  path.relative(
-    path.resolve(__dirname, '..'),
-    path.resolve(path.dirname(require.resolve('..')), value)
-  );
+  path.relative(root, path.resolve(path.dirname(index), value));
 
 const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
   if (types.isExportNamedDeclaration(declaration)) {
@@ -60,4 +60,7 @@ const mappings = ast.program.body.reduce((acc, declaration, index, self) => {
 }, {});
 
 fs.existsSync(path.dirname(output)) || fs.mkdirSync(path.dirname(output));
-fs.writeFileSync(output, JSON.stringify(mappings, null, 2));
+fs.writeFileSync(
+  output,
+  JSON.stringify({ name: packageJson.name, index, mappings }, null, 2)
+);

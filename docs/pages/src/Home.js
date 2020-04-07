@@ -2,96 +2,125 @@
 /* eslint-disable import/no-commonjs */
 
 import * as React from 'react';
-import { css, styles, include } from 'linaria';
+import { styled } from 'linaria/react';
 import { Link } from 'component-docs/components';
+import ThemeIcon from '../../components/theme-icon';
+import Content from './components/Content';
 
 export default class Home extends React.Component<{}> {
+  constructor(props) {
+    super(props);
+    this.state = { isDark: false };
+  }
+
   render() {
+    const { isDark } = this.state;
     return (
-      <div {...styles(container)}>
-        <p {...styles(banner)}>
-          Looking for the documentation for version 1.0? You can find it{' '}
-          <a href="1.0">here</a>.
-        </p>
-        <div {...styles(cover)}>
-          <img
-            {...styles(logo)}
-            src="images/paper-logo.svg"
-            alt="React Native Paper"
-          />
-          <p>Cross-platform Material Design for React Native</p>
-          <div {...styles(buttons)}>
-            <Link {...styles(button, primary)} to="getting-started">
-              Get started
-            </Link>
-            <a
-              {...styles(button, secondary)}
-              href="https://github.com/callstack/react-native-paper"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-          </div>
+      <Container>
+        <Content>
+          <h1>
+            Cross-platform{' '}
+            <Highlighted target="_blank" href="https://material.io/design">
+              Material Design
+            </Highlighted>{' '}
+            for React Native.
+          </h1>
+          <p>
+            Paper is a collection of customizable and production-ready
+            components for React Native, following Google’s Material Design
+            guidelines.
+          </p>
           <a
             href="https://snack.expo.io/@satya164/github.com-callstack-react-native-paper:example"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Try it out with Snack
+            Try the demo on Snack
           </a>
-        </div>
-        <div {...styles(gallery)}>
-          {// eslint-disable-next-line react/no-array-index-key
-          screenshots.map((image, i) => <img key={i} src={image} alt="" />)}
-        </div>
-      </div>
+          <Buttons>
+            <Button className="primary" as={Link} to="getting-started">
+              Get started
+            </Button>
+            <Button
+              href="https://github.com/callstack/react-native-paper"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </Button>
+          </Buttons>
+          <ThemeSwitch>
+            <Label
+              class="switch-wrap"
+              style={{ backgroundColor: isDark ? '#000' : '#6200ee' }}
+            >
+              <Input
+                type="checkbox"
+                checked={isDark}
+                onChange={() => this.setState({ isDark: !isDark })}
+              />
+              <Switch class="switch"></Switch>
+            </Label>
+            <ThemeIcon type={isDark ? 'dark' : 'light'} />
+          </ThemeSwitch>
+          {this.state.isDark ? (
+            <Gallery>
+              {screenshotsDark.map((image, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <img
+                  style={{ boxShadow: ' 0 0 0 #fff' }}
+                  key={i}
+                  src={image}
+                  alt=""
+                />
+              ))}
+            </Gallery>
+          ) : (
+            <Gallery>
+              {screenshots.map((image, i) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <img key={i} src={image} alt="" />
+              ))}
+            </Gallery>
+          )}
+        </Content>
+      </Container>
     );
   }
 }
 
-const banner = css`
-  margin: 0;
-  padding: 10px 16px;
-  text-align: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+const PRIMARY_COLOR = '#6200ee';
+const RESTING_SHADOW = '0 1px 3px rgba(0, 0, 0, 0.12)';
+
+const Highlighted = styled.a`
+  color: ${PRIMARY_COLOR};
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: ${PRIMARY_COLOR};
+  }
 `;
 
-const logo = css`
-  max-height: 125px;
-  width: auto;
-`;
-
-const elevated = css`
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.24);
-`;
-
-const container = css`
+const Container = styled.div`
   width: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 `;
 
-const cover = css`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 80vh;
-  padding: 32px;
-  text-align: center;
-`;
-
-const buttons = css`
+const Buttons = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 16px 0;
+  flex-wrap: wrap;
+  margin: 16px -8px;
+  min-width: 0;
 `;
 
-const button = css`
+const Button = styled.a`
   appearance: none;
   margin: 8px;
   min-width: 120px;
+  white-space: nowrap;
   font-size: 13px;
   font-weight: 600;
   text-align: center;
@@ -104,54 +133,86 @@ const button = css`
   cursor: pointer;
   transition: 0.3s;
 
-  &:hover {
-    text-decoration: none;
-  }
-`;
-
-const primary = css`
-  background-color: #6200ee;
-  border-color: #6200ee;
-  color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-
-  &:hover,
-  &:focus,
-  &:active {
-    ${include(elevated)};
-
-    color: #fff;
-  }
-`;
-
-const secondary = css`
   background-color: transparent;
   border-color: rgba(0, 0, 0, 0.24);
-  color: #6200ee;
+  color: ${PRIMARY_COLOR};
 
   &:hover,
   &:focus,
   &:active {
     background-color: rgba(98, 0, 238, 0.08);
-    color: #6200ee;
+    color: ${PRIMARY_COLOR};
+  }
+
+  &.primary {
+    box-shadow: ${RESTING_SHADOW};
+    background-color: ${PRIMARY_COLOR};
+    border-color: ${PRIMARY_COLOR};
+    color: #fff;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: ${PRIMARY_COLOR};
+      color: #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.24);
+    }
   }
 `;
 
-const gallery = css`
+const Gallery = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
+  justify-content: flex-start;
+  margin: 0px -16px;
   min-width: 0;
 
   > img {
-    ${include(elevated)};
-
+    box-shadow: ${RESTING_SHADOW};
     display: block;
-    height: 640px;
+    max-height: 480px;
     width: auto;
-    margin: 10px;
+    margin: 16px;
+  }
+`;
+
+const Label = styled.label`
+  cursor: pointer  
+  background: #6200ee
+  padding: 3px 
+  width: 33px 
+  height: 20px 
+  border-radius: 33.5px 
+  display: grid
+  margin-right: 5px
+`;
+const ThemeSwitch = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+const Input = styled.input`
+  position: absolute 
+  opacity: 0 
+  width: 0 
+  height: 0 
+  &:checked + .switch {
+    grid-template-columns: 1fr 1fr 0fr;
+  }
+}
+`;
+const Switch = styled.div`
+  height: 14px;
+  width: 26px;
+  display: grid;
+  grid-template-columns: 0fr 1fr 1fr;
+  transition: 0.2s;
+  &:after {
+    content: '';
+    border-radius: 50%;
+    background: #fff;
+    grid-column: 2;
+    transition: background 0.2s;
   }
 `;
 
@@ -168,4 +229,18 @@ const screenshots = [
   'gallery/typography.png',
   'gallery/bottom-navigation.png',
   'gallery/fab.png',
+];
+const screenshotsDark = [
+  'gallery/button-dark.png',
+  'gallery/input-dark.png',
+  'gallery/card-dark.png',
+  'gallery/appbar-dark.png',
+  'gallery/searchbar-dark.png',
+  'gallery/snackbar-dark.png',
+  'gallery/chip-dark.png',
+  'gallery/list-dark.png',
+  'gallery/list-accordion-dark.png',
+  'gallery/typography-dark.png',
+  'gallery/bottom-navigation-dark.png',
+  'gallery/fab-dark.png',
 ];

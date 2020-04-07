@@ -2,11 +2,13 @@
 
 exports[`renders extended FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
+      "opacity": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
@@ -14,15 +16,22 @@ exports[`renders extended FAB 1`] = `
       },
       "shadowOpacity": 0.24,
       "shadowRadius": 6,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
     }
   }
 >
   <View
-    accessibilityComponentType="button"
     accessibilityLabel="Add items"
-    accessibilityTraits="button"
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
+    focusable={true}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -30,9 +39,14 @@ exports[`renders extended FAB 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 28,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 28,
+        },
+      ]
     }
   >
     <View
@@ -84,9 +98,7 @@ exports[`renders extended FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -108,28 +120,26 @@ exports[`renders extended FAB 1`] = `
                   },
                 ],
                 Object {
-                  "fontFamily": "Material Icons",
+                  "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
-            
+            
           </Text>
         </View>
       </View>
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
               "color": "#000000",
-              "fontFamily": "Helvetica Neue",
+              "fontFamily": "System",
+              "fontWeight": "400",
               "textAlign": "left",
-              "writingDirection": "ltr",
             },
             Array [
               Object {
@@ -137,33 +147,11 @@ exports[`renders extended FAB 1`] = `
               },
               Object {
                 "color": "rgba(0, 0, 0, .54)",
-                "fontFamily": "HelveticaNeue-Medium",
+                "fontFamily": "System",
+                "fontWeight": "500",
               },
             ],
           ]
-        }
-        theme={
-          Object {
-            "colors": Object {
-              "accent": "#03dac4",
-              "backdrop": "rgba(0, 0, 0, 0.5)",
-              "background": "#f6f6f6",
-              "disabled": "rgba(0, 0, 0, 0.26)",
-              "error": "#B00020",
-              "placeholder": "rgba(0, 0, 0, 0.54)",
-              "primary": "#6200ee",
-              "surface": "#ffffff",
-              "text": "#000000",
-            },
-            "dark": false,
-            "fonts": Object {
-              "light": "HelveticaNeue-Light",
-              "medium": "HelveticaNeue-Medium",
-              "regular": "Helvetica Neue",
-              "thin": "HelveticaNeue-Thin",
-            },
-            "roundness": 4,
-          }
         }
       >
         ADD ITEMS
@@ -175,11 +163,13 @@ exports[`renders extended FAB 1`] = `
 
 exports[`renders normal FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
+      "opacity": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
@@ -187,14 +177,21 @@ exports[`renders normal FAB 1`] = `
       },
       "shadowOpacity": 0.24,
       "shadowRadius": 6,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
     }
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
+    focusable={true}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -202,9 +199,14 @@ exports[`renders normal FAB 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 28,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 28,
+        },
+      ]
     }
   >
     <View
@@ -256,9 +258,7 @@ exports[`renders normal FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -280,14 +280,15 @@ exports[`renders normal FAB 1`] = `
                   },
                 ],
                 Object {
-                  "fontFamily": "Material Icons",
+                  "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
-            
+            
           </Text>
         </View>
       </View>
@@ -298,11 +299,13 @@ exports[`renders normal FAB 1`] = `
 
 exports[`renders small FAB 1`] = `
 <View
+  pointerEvents="auto"
   style={
     Object {
       "backgroundColor": "#03dac4",
       "borderRadius": 28,
       "elevation": 6,
+      "opacity": 1,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 5,
@@ -310,14 +313,21 @@ exports[`renders small FAB 1`] = `
       },
       "shadowOpacity": 0.24,
       "shadowRadius": 6,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
     }
   }
 >
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
+    focusable={true}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -325,9 +335,14 @@ exports[`renders small FAB 1`] = `
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
     style={
-      Object {
-        "borderRadius": 28,
-      }
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Object {
+          "borderRadius": 28,
+        },
+      ]
     }
   >
     <View
@@ -379,9 +394,7 @@ exports[`renders small FAB 1`] = `
         >
           <Text
             accessibilityElementsHidden={true}
-            accessible={true}
             allowFontScaling={false}
-            ellipsizeMode="tail"
             importantForAccessibility="no-hide-descendants"
             pointerEvents="none"
             style={
@@ -403,14 +416,15 @@ exports[`renders small FAB 1`] = `
                   },
                 ],
                 Object {
-                  "fontFamily": "Material Icons",
+                  "fontFamily": "Material Design Icons",
                   "fontStyle": "normal",
                   "fontWeight": "normal",
                 },
+                Object {},
               ]
             }
           >
-            
+            
           </Text>
         </View>
       </View>

@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import { Text } from 'react-native';
 import {
   Provider as PaperProvider,
@@ -10,4 +12,5 @@ import {
   NonExistentSecond as Stuff,
   ThemeProvider,
   withTheme,
+  Theme
 } from 'react-native-paper';

@@ -1,16 +1,17 @@
 {
   "name": "react-native-paper",
-  "version": "2.1.2",
+  "version": "3.7.0",
   "description": "Material design for React Native",
-  "main": "src/index.js",
-  "typings": "typings/index.d.ts",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "react-native": "lib/module/index.js",
+  "types": "lib/typescript/src/index.d.ts",
   "files": [
-    "src/",
-    "dist/",
-    "types.js",
-    "babel.js",
-    "typings/"
+    "src",
+    "lib",
+    "babel.js"
   ],
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/callstack/react-native-paper.git"
@@ -31,60 +32,115 @@
     "bootstrap"
   ],
   "scripts": {
-    "commitmsg": "node ./scripts/validate-commit-message.js $GIT_PARAMS",
-    "precommit": "yarn lint && yarn flow && yarn typescript && yarn test",
-    "flow": "flow",
-    "typescript": "node ./scripts/generate-ts-tests.js && tsc --noEmit --skipLibCheck --jsx react ./__ts-tests__/*",
-    "lint": "eslint .",
+    "typescript": "tsc --noEmit",
+    "lint": "eslint --ext '.js,.ts,.tsx' .",
     "test": "jest",
-    "prepare": "node ./scripts/generate-mappings",
-    "bootstrap": "yarn && yarn --cwd example && yarn --cwd docs",
-    "release": "release-it"
+    "prepare": "bob build && node ./scripts/generate-mappings.js",
+    "release": "release-it",
+    "bootstrap": "yarn --cwd example && yarn --cwd docs && yarn",
+    "docs": "yarn --cwd docs",
+    "example": "yarn --cwd example"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@callstack/react-theme-provider": "^1.0.5",
-    "color": "^2.0.1",
-    "create-react-context": "^0.2.2",
-    "hoist-non-react-statics": "^2.5.0",
-    "react-lifecycles-compat": "^3.0.4"
+    "@callstack/react-theme-provider": "^3.0.5",
+    "color": "^3.1.2",
+    "react-native-safe-area-view": "^0.14.6"
   },
   "devDependencies": {
-    "@types/react": "^16.4.14",
-    "@types/react-native": "^0.56.23",
+    "@babel/core": "^7.4.4",
+    "@babel/runtime": "^7.4.4",
+    "@callstack/eslint-config": "^9.0.0",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@react-native-community/bob": "^0.10.0",
+    "@release-it/conventional-changelog": "^1.1.0",
+    "@types/color": "^3.0.0",
+    "@types/jest": "^24.0.13",
+    "@types/node": "^13.1.0",
+    "@types/reach__router": "^1.2.4",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-native": "^0.61.4",
+    "@types/react-native-vector-icons": "^6.4.1",
+    "@typescript-eslint/eslint-plugin": "^2.12.0",
+    "@typescript-eslint/parser": "^2.12.0",
+    "all-contributors-cli": "^6.1.1",
     "babel-cli": "^6.26.0",
-    "babel-plugin-tester": "^5.0.0",
-    "babel-preset-react-native": "^4.0.0",
-    "chalk": "^2.4.1",
-    "conventional-changelog-cli": "^2.0.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.3.1",
+    "babel-test": "^0.1.1",
+    "chalk": "^4.0.0",
+    "commitlint": "^8.3.4",
+    "conventional-changelog-cli": "^2.0.11",
     "dedent": "^0.7.0",
-    "eslint": "^4.19.1",
+    "eslint": "^6.7.2",
     "eslint-config-callstack-io": "^1.1.1",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react-native": "^3.2.1",
-    "flow-bin": "~0.67.1",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react-native": "^3.5.0",
+    "flow-bin": "0.92.0",
     "glob": "^7.1.3",
-    "husky": "^0.14.3",
-    "jest": "^23.0.0",
-    "prettier": "^1.12.1",
-    "react": "16.3.1",
-    "react-dom": "16.3.1",
-    "react-native": "~0.55.4",
-    "react-native-vector-icons": "~4.6.0",
-    "react-test-renderer": "16.3.1",
-    "release-it": "^7.6.1",
-    "rimraf": "^2.6.2",
-    "typescript": "^3.0.3"
+    "husky": "^1.3.1",
+    "jest": "^24.9.0",
+    "jest-file-snapshot": "^0.3.2",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "prettier": "^1.19.0",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-native": "^0.61.4",
+    "react-native-testing-library": "^1.5.0",
+    "react-native-vector-icons": "~6.3.0",
+    "react-test-renderer": "16.8.3",
+    "release-it": "^13.4.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.7.1"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
     "react-native-vector-icons": "*"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "yarn lint && yarn typescript && yarn test"
+    }
+  },
   "jest": {
     "preset": "react-native",
+    "cacheDirectory": "./cache/jest",
     "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules"
+      "<rootDir>/example/node_modules",
+      "<rootDir>/lib/"
+    ],
+    "watchPathIgnorePatterns": [
+      "__fixtures__\\/[^/]+\\/(output|error)\\.js"
     ]
   },
-  "sideEffects": false
+  "greenkeeper": {
+    "ignore": [
+      "expo",
+      "flow-bin",
+      "react",
+      "react-dom",
+      "react-native",
+      "react-test-renderer",
+      "@types/react-native",
+      "@types/jest",
+      "husky",
+      "eslint"
+    ]
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ],
+    "files": [
+      "src/"
+    ]
+  }
 }

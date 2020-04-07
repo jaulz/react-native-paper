@@ -1,12 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders list accordion with children 1`] = `
+exports[`renders expanded accordion 1`] = `
 <View>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
+    accessibilityRole="button"
     accessible={true}
+    focusable={true}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -15,10 +16,13 @@ exports[`renders list accordion with children 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
-        Object {
-          "padding": 8,
-        },
-        undefined,
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -26,61 +30,11 @@ exports[`renders list accordion with children 1`] = `
       pointerEvents="none"
       style={
         Object {
+          "alignItems": "center",
           "flexDirection": "row",
         }
       }
     >
-      <View
-        pointerEvents="box-none"
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "height": 40,
-              "justifyContent": "center",
-              "margin": 8,
-              "width": 40,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          accessible={true}
-          allowFontScaling={false}
-          ellipsizeMode="tail"
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          style={
-            Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-            ]
-          }
-        >
-          
-        </Text>
-      </View>
       <View
         style={
           Array [
@@ -95,245 +49,25 @@ exports[`renders list accordion with children 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
                   "fontSize": 16,
                 },
                 Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
+                  "color": "#6200ee",
                 },
+                undefined,
               ],
             ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
-        >
-          Expandable list item
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "margin": 8,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          accessible={true}
-          allowFontScaling={false}
-          ellipsizeMode="tail"
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          style={
-            Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.87)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-            ]
-          }
-        >
-          
-        </Text>
-      </View>
-    </View>
-  </View>
-</View>
-`;
-
-exports[`renders list accordion with left items 1`] = `
-<View>
-  <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
-    accessible={true}
-    isTVSelectable={true}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    style={
-      Array [
-        Object {
-          "padding": 8,
-        },
-        undefined,
-      ]
-    }
-  >
-    <View
-      pointerEvents="none"
-      style={
-        Object {
-          "flexDirection": "row",
-        }
-      }
-    >
-      <View
-        pointerEvents="box-none"
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "height": 40,
-              "justifyContent": "center",
-              "margin": 8,
-              "width": 40,
-            },
-            undefined,
-          ]
-        }
-      >
-        <Text
-          accessibilityElementsHidden={true}
-          accessible={true}
-          allowFontScaling={false}
-          ellipsizeMode="tail"
-          importantForAccessibility="no-hide-descendants"
-          pointerEvents="none"
-          style={
-            Array [
-              Object {
-                "color": "rgba(0, 0, 0, 0.54)",
-                "fontSize": 24,
-              },
-              Array [
-                Object {
-                  "transform": Array [
-                    Object {
-                      "scaleX": 1,
-                    },
-                  ],
-                },
-                Object {
-                  "backgroundColor": "transparent",
-                },
-              ],
-              Object {
-                "fontFamily": "Material Icons",
-                "fontStyle": "normal",
-                "fontWeight": "normal",
-              },
-            ]
-          }
-        >
-          
-        </Text>
-      </View>
-      <View
-        style={
-          Array [
-            Object {
-              "margin": 8,
-            },
-            Object {
-              "flex": 1,
-              "justifyContent": "center",
-            },
-          ]
-        }
-      >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
-          numberOfLines={1}
-          style={
-            Array [
-              Object {
-                "color": "#000000",
-                "fontFamily": "Helvetica Neue",
-                "textAlign": "left",
-                "writingDirection": "ltr",
-              },
-              Array [
-                Object {
-                  "fontSize": 16,
-                },
-                Object {
-                  "color": "rgba(0, 0, 0, 0.87)",
-                },
-              ],
-            ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
           }
         >
           Accordion item 1
@@ -351,9 +85,7 @@ exports[`renders list accordion with left items 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -375,28 +107,24 @@ exports[`renders list accordion with left items 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
-          
+          
         </Text>
       </View>
     </View>
   </View>
-</View>
-`;
-
-exports[`renders multiline list accordion 1`] = `
-<View>
   <View
-    accessibilityComponentType="button"
-    accessibilityTraits="button"
     accessible={true}
+    focusable={false}
     isTVSelectable={true}
+    onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -405,10 +133,90 @@ exports[`renders multiline list accordion 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Array [
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      style={
         Object {
-          "padding": 8,
-        },
-        undefined,
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "marginVertical": 6,
+              "paddingLeft": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          List item 1
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list accordion with children 1`] = `
+<View>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
       ]
     }
   >
@@ -416,6 +224,180 @@ exports[`renders multiline list accordion 1`] = `
       pointerEvents="none"
       style={
         Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        pointerEvents="box-none"
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
+              "margin": 8,
+              "width": 40,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Expandable list item
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list accordion with custom title and description styles 1`] = `
+<View>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "alignItems": "center",
           "flexDirection": "row",
         }
       }
@@ -434,17 +416,14 @@ exports[`renders multiline list accordion 1`] = `
         }
       >
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={1}
           style={
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -453,47 +432,24 @@ exports[`renders multiline list accordion 1`] = `
                 Object {
                   "color": "rgba(0, 0, 0, 0.87)",
                 },
+                Object {
+                  "color": "red",
+                },
               ],
             ]
           }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
-          }
         >
-          Expandable list item
+          Accordion item 1
         </Text>
         <Text
-          accessible={true}
-          allowFontScaling={true}
-          ellipsizeMode="tail"
           numberOfLines={2}
           style={
             Array [
               Object {
                 "color": "#000000",
-                "fontFamily": "Helvetica Neue",
+                "fontFamily": "System",
+                "fontWeight": "400",
                 "textAlign": "left",
-                "writingDirection": "ltr",
               },
               Array [
                 Object {
@@ -502,31 +458,11 @@ exports[`renders multiline list accordion 1`] = `
                 Object {
                   "color": "rgba(0, 0, 0, 0.54)",
                 },
+                Object {
+                  "color": "red",
+                },
               ],
             ]
-          }
-          theme={
-            Object {
-              "colors": Object {
-                "accent": "#03dac4",
-                "backdrop": "rgba(0, 0, 0, 0.5)",
-                "background": "#f6f6f6",
-                "disabled": "rgba(0, 0, 0, 0.26)",
-                "error": "#B00020",
-                "placeholder": "rgba(0, 0, 0, 0.54)",
-                "primary": "#6200ee",
-                "surface": "#ffffff",
-                "text": "#000000",
-              },
-              "dark": false,
-              "fonts": Object {
-                "light": "HelveticaNeue-Light",
-                "medium": "HelveticaNeue-Medium",
-                "regular": "Helvetica Neue",
-                "thin": "HelveticaNeue-Thin",
-              },
-              "roundness": 4,
-            }
           }
         >
           Describes the expandable list item
@@ -548,9 +484,7 @@ exports[`renders multiline list accordion 1`] = `
       >
         <Text
           accessibilityElementsHidden={true}
-          accessible={true}
           allowFontScaling={false}
-          ellipsizeMode="tail"
           importantForAccessibility="no-hide-descendants"
           pointerEvents="none"
           style={
@@ -572,14 +506,339 @@ exports[`renders multiline list accordion 1`] = `
                 },
               ],
               Object {
-                "fontFamily": "Material Icons",
+                "fontFamily": "Material Design Icons",
                 "fontStyle": "normal",
                 "fontWeight": "normal",
               },
+              Object {},
             ]
           }
         >
-          
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders list accordion with left items 1`] = `
+<View>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        pointerEvents="box-none"
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
+              "margin": 8,
+              "width": 40,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.54)",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Accordion item 1
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders multiline list accordion 1`] = `
+<View>
+  <View
+    accessibilityRole="button"
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        false,
+        Array [
+          Object {
+            "padding": 8,
+          },
+          undefined,
+        ],
+      ]
+    }
+  >
+    <View
+      pointerEvents="none"
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "flex": 1,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 16,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.87)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Expandable list item
+        </Text>
+        <Text
+          numberOfLines={2}
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "textAlign": "left",
+              },
+              Array [
+                Object {
+                  "fontSize": 14,
+                },
+                Object {
+                  "color": "rgba(0, 0, 0, 0.54)",
+                },
+                undefined,
+              ],
+            ]
+          }
+        >
+          Describes the expandable list item
+        </Text>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "margin": 8,
+            },
+            Object {
+              "alignItems": "center",
+              "height": 40,
+              "justifyContent": "center",
+            },
+          ]
+        }
+      >
+        <Text
+          accessibilityElementsHidden={true}
+          allowFontScaling={false}
+          importantForAccessibility="no-hide-descendants"
+          pointerEvents="none"
+          style={
+            Array [
+              Object {
+                "color": "rgba(0, 0, 0, 0.87)",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "transform": Array [
+                    Object {
+                      "scaleX": 1,
+                    },
+                  ],
+                },
+                Object {
+                  "backgroundColor": "transparent",
+                },
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          
         </Text>
       </View>
     </View>

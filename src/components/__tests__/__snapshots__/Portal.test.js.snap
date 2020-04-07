@@ -4,17 +4,14 @@ exports[`renders portal with siblings 1`] = `
 Array [
   <View
     collapsable={false}
+    pointerEvents="box-none"
     style={
       Object {
         "flex": 1,
       }
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
+    <Text>
       Outside content
     </Text>
   </View>,
@@ -32,9 +29,7 @@ Array [
     }
   >
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
+      testID="content"
     >
       Portal content
     </Text>
